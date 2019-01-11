@@ -1,0 +1,20 @@
+{
+  "models": [
+    {
+      "type": "petrinet"
+    }
+  ],
+  "classifiers": [
+    {
+      "type": "place"
+    },
+    {
+      "type": "transition"
+    }
+  ],
+  "relations": [
+    {
+      "type": "arc"
+    }
+  ]
+}

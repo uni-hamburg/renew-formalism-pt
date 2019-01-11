@@ -1,0 +1,24 @@
+{
+  "modeling-tool-definitions": [
+    {
+      "tool-name": "Petrinet Editor",
+      "target-model": "petrinet",
+      "file-description": "Petrinet Model",
+      "file-extension": "pn"
+    }
+  ],
+  "tool-mappings": [
+    {
+      "target-type": "place",
+      "icon": "path-to-svg"
+    },
+    {
+      "target-type": "transition",
+      "icon": "path-to-svg"
+    },
+    {
+      "target-type": "arc",
+      "icon": "path-to-svg"
+    }
+  ]
+}

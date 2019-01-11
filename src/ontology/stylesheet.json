@@ -1,0 +1,33 @@
+{
+  "classifier-styles": [
+    {
+      "target-type": "transition",
+      "default-dimension": {
+        "width": 32,
+        "height": 48
+      },
+      "background-color": "white",
+      "line-color": "black",
+      "line-style": "normal-line"
+    },
+    {
+      "target-type": "place",
+      "default-dimension": {
+        "width": 40,
+        "height": 40
+      },
+      "background-color": "white",
+      "line-color": "black",
+      "line-style": "normal-line"
+    }
+  ],
+  "relation-styles": [
+    {
+      "target-type": "arc",
+      "arrow-end": "normal-arrow"
+    }
+  ],
+  "text-styles": [
+
+  ]
+}
