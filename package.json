@@ -3,9 +3,7 @@
   "description": "A pt-net formalism metamodel",
   "version": "0.1.0",
   "dependencies": {
-    
+    "renew-formalism": "https://github.com/uni-hamburg/renew-formalism/tarball/master"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
