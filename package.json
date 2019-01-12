@@ -1,0 +1,11 @@
+{
+  "name": "renew-formalism-pt",
+  "description": "A pt-net formalism metamodel",
+  "version": "0.1.0",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+
+  }
+}
