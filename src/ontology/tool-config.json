@@ -1,12 +1,10 @@
 {
-  "modeling-tool-definitions": [
-    {
-      "tool-name": "Petrinet Editor",
-      "target-model": "petrinet",
-      "file-description": "Petrinet Model",
-      "file-extension": "pn"
-    }
-  ],
+  "modeling-tool-definitions": {
+    "tool-name": "Petrinet Editor",
+    "target-model": "petrinet",
+    "file-description": "Petrinet Model",
+    "file-extension": "pn"
+  },
   "tool-mappings": [
     {
       "target-type": "place",
