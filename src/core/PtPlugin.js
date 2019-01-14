@@ -1,4 +1,4 @@
-import Plugin from 'renew-formalism/plugin'
+import { Plugin } from 'renew-formalism';
 
 import metamodel from '../ontology/metamodel.json';
 import stylesheet from '../ontology/stylesheet.json';
