@@ -2,22 +2,22 @@
   "classifier-styles": [
     {
       "target-type": "place",
+      "representation": "place.svg",
       "default-dimension": {
         "width": 40,
         "height": 40
       },
-      "svg": "../assets/place.svg",
       "background-color": "white",
       "line-color": "black",
       "line-style": "normal-line"
     },
     {
       "target-type": "transition",
+      "representation": "transition.svg",
       "default-dimension": {
         "width": 48,
         "height": 32
       },
-      "svg": "../assets/place.svg",
       "background-color": "white",
       "line-color": "black",
       "line-style": "normal-line"
