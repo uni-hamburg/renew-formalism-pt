@@ -13,21 +13,21 @@ export default class PluginPT extends Formalism.Plugin {
      * @return {MetaModel}
      */
     getMetaModel () {
-        return Formalism.MetaModel.fromJson(metamodel);
+        return Formalism.Ontology.MetaModel.fromJson(metamodel);
     }
 
     /**
      * @return {Stylesheet}
      */
     getStylesheet () {
-        return Formalism.Stylesheet.fromJson(stylesheet);
+        return Formalism.Ontology.Stylesheet.fromJson(stylesheet);
     }
 
     /**
      * @return {ToolConfiguration}
      */
     getToolConfiguration () {
-        return Formalism.ToolConfiguration.fromJson(toolConfiguration);
+        return Formalism.Ontology.ToolConfiguration.fromJson(toolConfiguration);
     }
 
     // TODO: rules ?
