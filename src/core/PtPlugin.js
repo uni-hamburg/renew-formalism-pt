@@ -1,21 +1,28 @@
 import { Plugin } from 'renew-formalism';
+import { MetaModel, Stylesheet, ToolConfiguration } from 'renew-formalism/ontology';
 
-import metamodel from '../ontology/metamodel.json';
-import stylesheet from '../ontology/stylesheet.json';
-import toolConfiguration from '../ontology/tool-config.json';
+import metamodel from '../ontology/MetaModel.json';
+import stylesheet from '../ontology/Stylesheet.json';
+import toolConfiguration from '../ontology/ToolConfiguration.json';
 
 class PluginPt extends Plugin {
 
     getMetaModel () {
-        return metamodel;
+        return MetaModel.fromJson(metamodel);
     }
 
     getStylesheet () {
-        return stylesheet;
+        return Stylesheet.fromJson(stylesheet);
     }
 
     getToolConfiguration () {
-        return toolConfiguration;
+        return ToolConfiguration.fromJson(toolConfiguration);
     }
+
+    // TODO: rules ?
+
+    // TODO: context ?
+
+    // TODO: Petrinetz Beschreibung (rnw ? / pnml ? / json ?)
 
 }
