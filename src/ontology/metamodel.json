@@ -1,7 +1,5 @@
 {
-  "model": {
-    "type": "petrinet"
-  },
+  "type": "petrinet",
   "classifiers": [
     {
       "type": "place"
