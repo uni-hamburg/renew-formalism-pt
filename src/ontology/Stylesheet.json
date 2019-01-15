@@ -1,21 +1,23 @@
 {
   "classifier-styles": [
     {
-      "target-type": "transition",
-      "default-dimension": {
-        "width": 48,
-        "height": 32
-      },
-      "background-color": "white",
-      "line-color": "black",
-      "line-style": "normal-line"
-    },
-    {
       "target-type": "place",
       "default-dimension": {
         "width": 40,
         "height": 40
       },
+      "svg": "../assets/place.svg",
+      "background-color": "white",
+      "line-color": "black",
+      "line-style": "normal-line"
+    },
+    {
+      "target-type": "transition",
+      "default-dimension": {
+        "width": 48,
+        "height": 32
+      },
+      "svg": "../assets/place.svg",
       "background-color": "white",
       "line-color": "black",
       "line-style": "normal-line"

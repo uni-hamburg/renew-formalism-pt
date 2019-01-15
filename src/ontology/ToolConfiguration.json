@@ -9,17 +9,17 @@
     {
       "target-type": "place",
       "tool-title": "Create Place",
-      "icon": "path-to-svg"
+      "icon": "../assets/icons/place.svg"
     },
     {
       "target-type": "transition",
       "tool-title": "Create Transition",
-      "icon": "path-to-svg"
+      "icon": "../assets/icons/transition.svg"
     },
     {
       "target-type": "arc",
       "tool-title": "Create Arc",
-      "icon": "path-to-svg"
+      "icon": ""
     }
   ]
 }
