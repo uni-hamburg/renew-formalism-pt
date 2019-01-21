@@ -2,7 +2,18 @@
   "classifier-styles": [
     {
       "target-type": "place",
-      "representation": "place.svg",
+      "representation": {
+        "name": "circle",
+        "type": "element",
+        "value": "",
+        "attributes": {
+          "cx": "20",
+          "cy": "20",
+          "r": "19",
+          "style": "fill:#fff;stroke:#000;stroke-width:2px;"
+        },
+        "children": []
+      },
       "default-dimension": {
         "width": 40,
         "height": 40
@@ -13,7 +24,19 @@
     },
     {
       "target-type": "transition",
-      "representation": "transition.svg",
+      "representation": {
+        "name": "rect",
+        "type": "element",
+        "value": "",
+        "attributes": {
+          "x": "1",
+          "y": "1",
+          "width": "46",
+          "height": "30",
+          "style": "fill:#fff;stroke:#000;stroke-width:2px;"
+        },
+        "children": []
+      },
       "default-dimension": {
         "width": 48,
         "height": 32
