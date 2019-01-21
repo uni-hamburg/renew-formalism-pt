@@ -3,13 +3,14 @@
     {
       "target-type": "place",
       "representation": {
-        "name": "circle",
+        "name": "ellipse",
         "type": "element",
         "value": "",
         "attributes": {
           "cx": "20",
           "cy": "20",
-          "r": "19",
+          "rx": "19",
+          "ry": "19",
           "style": "fill:#fff;stroke:#000;stroke-width:2px;"
         },
         "children": []
