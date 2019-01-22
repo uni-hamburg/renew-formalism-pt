@@ -19,7 +19,7 @@
     {
       "target-type": "arc",
       "tool-title": "Create Arc",
-      "icon": ""
+      "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve'%3E%3Cpath id='path2384' d='M21.698,19.98c0.253,-0.579 0.472,-1.197 0.601,-1.702c0.101,-0.395 0.242,-1.206 0.242,-1.391l0,-0.136l-22.541,0l0,-1.56l22.541,0l0,-0.136c0,-0.185 -0.141,-0.995 -0.242,-1.391c-0.129,-0.504 -0.348,-1.123 -0.601,-1.702c-0.128,-0.291 -0.229,-0.529 -0.225,-0.529c0.052,0 10.52,4.508 10.527,4.534c0.007,0.025 -10.461,4.543 -10.526,4.543c-0.005,0 0.096,-0.239 0.224,-0.53Z' /%3E%3C/svg%3E"
     }
   ]
 }
