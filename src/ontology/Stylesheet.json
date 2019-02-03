@@ -13,6 +13,12 @@
           "ry": "19",
           "style": "fill:#fff;stroke:#000;stroke-width:2px;"
         },
+        "proportions": {
+          "cx": 0.5,
+          "cy": 0.5,
+          "rx": 0.475,
+          "ry": 0.475
+        },
         "children": []
       },
       "default-dimension": {
@@ -35,6 +41,12 @@
           "width": "46",
           "height": "30",
           "style": "fill:#fff;stroke:#000;stroke-width:2px;"
+        },
+        "proportions": {
+          "x": 0.02083,
+          "y": 0.03125,
+          "width": 0.958333,
+          "height": 0.9375
         },
         "children": []
       },
