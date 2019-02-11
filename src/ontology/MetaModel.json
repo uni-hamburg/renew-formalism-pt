@@ -10,7 +10,16 @@
   ],
   "relations": [
     {
-      "type": "arc"
+      "type": "arc",
+      "bind": {
+        "place": [
+          "transition"
+        ],
+        "transition": [
+          "place"
+        ]
+      }
     }
   ]
 }
+
