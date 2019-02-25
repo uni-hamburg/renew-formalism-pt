@@ -18,7 +18,13 @@
         "transition": [
           "place"
         ]
-      }
+      },
+      "arrow-end": "arrow-head"
+    }
+  ],
+  "arrow-heads": [
+    {
+      "type": "arrow-head"
     }
   ]
 }

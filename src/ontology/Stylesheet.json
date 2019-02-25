@@ -59,10 +59,28 @@
       "line-style": "normal-line"
     }
   ],
+  "arrow-head-styles": [
+    {
+      "target-type": "arrow-head",
+      "representation": {
+        "name": "path",
+        "type": "element",
+        "value": "",
+        "ref": {
+          "x": 11,
+          "y": 10
+        },
+        "attributes": {
+          "d": "M 1 5 L 11 10 L 1 15 Z",
+          "style": "fill:#fff;stroke:#000;stroke-width:2px;"
+        },
+        "children": []
+      }
+    }
+  ],
   "relation-styles": [
     {
-      "target-type": "arc",
-      "arrow-end": "normal-arrow"
+      "target-type": "arc"
     }
   ],
   "text-styles": [
