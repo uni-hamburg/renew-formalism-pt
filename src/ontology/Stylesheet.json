@@ -62,17 +62,21 @@
   "arrow-head-styles": [
     {
       "target-type": "arrow-head",
+      "ref": {
+        "x": 12,
+        "y": 10
+      },
+      "default-dimension": {
+        "width": 48,
+        "height": 32
+      },
       "representation": {
         "name": "path",
         "type": "element",
         "value": "",
-        "ref": {
-          "x": 11,
-          "y": 10
-        },
         "attributes": {
           "d": "M 1 5 L 11 10 L 1 15 Z",
-          "style": "fill:#fff;stroke:#000;stroke-width:2px;"
+          "style": "stroke:#000;stroke-width:2px;"
         },
         "children": []
       }
