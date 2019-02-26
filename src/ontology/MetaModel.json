@@ -2,10 +2,17 @@
   "type": "pt",
   "classifiers": [
     {
-      "type": "place"
+      "type": "place",
+      "labels": [
+        "name",
+        "marking"
+      ]
     },
     {
-      "type": "transition"
+      "type": "transition",
+      "labels": [
+        "name"
+      ]
     }
   ],
   "relations": [
@@ -19,12 +26,24 @@
           "place"
         ]
       },
-      "arrow-end": "arrow-head"
+      "arrow-end": "arrow-head",
+      "labels": [
+        "name"
+      ]
     }
   ],
   "arrow-heads": [
     {
       "type": "arrow-head"
+    }
+  ],
+  "texts": [
+    {
+      "type": "name"
+    },
+    {
+      "type": "marking",
+      "regex": "\\d+"
     }
   ]
 }

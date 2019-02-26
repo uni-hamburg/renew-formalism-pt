@@ -88,6 +88,13 @@
     }
   ],
   "text-styles": [
-
+    {
+      "target-type": "name",
+      "position": "south"
+    },
+    {
+      "target-type": "marking",
+      "position": "center"
+    }
   ]
 }
