@@ -6,24 +6,29 @@
   "tool-mappings": [
     {
       "target-type": "place",
-      "tool-title": "Create Place",
+      "tool-title": "Place tool",
       "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve'%3E%3Cg%3E%3Ccircle cx='16' cy='16' r='15' style='fill:%23fff;stroke:%23000;stroke-width:2px;'/%3E%3C/g%3E%3C/svg%3E"
     },
     {
       "target-type": "transition",
-      "tool-title": "Create Transition",
+      "tool-title": "Transition tool",
       "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve'%3E%3Cg%3E%3Crect x='1' y='1' width='30' height='18' style='fill:%23fff;stroke:%23000;stroke-width:2px;'/%3E%3C/g%3E%3C/svg%3E"
     },
     {
       "target-type": "arc",
-      "tool-title": "Create Arc",
+      "tool-title": "Arc tool",
       "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve'%3E%3Cpath id='path2384' d='M21.698,19.98c0.253,-0.579 0.472,-1.197 0.601,-1.702c0.101,-0.395 0.242,-1.206 0.242,-1.391l0,-0.136l-22.541,0l0,-1.56l22.541,0l0,-0.136c0,-0.185 -0.141,-0.995 -0.242,-1.391c-0.129,-0.504 -0.348,-1.123 -0.601,-1.702c-0.128,-0.291 -0.229,-0.529 -0.225,-0.529c0.052,0 10.52,4.508 10.527,4.534c0.007,0.025 -10.461,4.543 -10.526,4.543c-0.005,0 0.096,-0.239 0.224,-0.53Z' /%3E%3C/svg%3E"
+    },
+    {
+      "target-type": "name",
+      "tool-title": "Name tool",
+      "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;'%3E%3Cpath d='M17.752,8.291c-1.667,0 -3.064,0.447 -4.191,1.342c-1.128,0.894 -1.692,1.844 -1.692,2.849l0,7.739l1.931,0c0.281,0 0.499,0.074 0.652,0.221c0.153,0.147 0.23,0.319 0.23,0.515c0,0.208 -0.083,0.389 -0.248,0.542c-0.166,0.153 -0.389,0.23 -0.671,0.23l-5.57,0c-0.27,0 -0.478,-0.08 -0.625,-0.239c-0.147,-0.16 -0.221,-0.343 -0.221,-0.552c0,-0.196 0.068,-0.364 0.202,-0.505c0.135,-0.141 0.325,-0.212 0.57,-0.212l1.986,0l0,-11.526l-1.986,0.405c-0.135,0.036 -0.257,0.055 -0.367,0.055c-0.209,0 -0.38,-0.068 -0.515,-0.202c-0.135,-0.135 -0.202,-0.301 -0.202,-0.497c0,-0.404 0.202,-0.655 0.606,-0.754l3.015,-0.606c0.172,-0.025 0.282,-0.037 0.331,-0.037c0.453,0 0.692,0.239 0.717,0.717l0.092,2.206c0.466,-0.919 1.244,-1.682 2.335,-2.289c1.09,-0.606 2.267,-0.91 3.529,-0.91c1.728,0 3.021,0.448 3.879,1.342c0.858,0.895 1.287,2.163 1.287,3.806l0,8.29l2.003,0c0.233,0 0.414,0.074 0.543,0.221c0.128,0.147 0.193,0.319 0.193,0.515c0,0.208 -0.068,0.389 -0.202,0.542c-0.135,0.153 -0.325,0.23 -0.57,0.23l-6.342,0c-0.27,0 -0.478,-0.08 -0.626,-0.239c-0.147,-0.16 -0.22,-0.343 -0.22,-0.552c0,-0.196 0.067,-0.364 0.202,-0.505c0.135,-0.141 0.325,-0.212 0.57,-0.212l2.684,0l0,-8.419c0,-1.115 -0.279,-1.979 -0.837,-2.592c-0.557,-0.613 -1.381,-0.919 -2.472,-0.919Z' style='fill-rule:nonzero;'/%3E%3C/svg%3E"
     }
   ],
   "context-tool-mappings": [
     {
       "target-type": "arc",
-      "tool-title": "Create Arc",
+      "tool-title": "Arc tool",
       "icon": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg width='100%25' height='100%25' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve'%3E%3Cpath id='path2384' d='M21.698,19.98c0.253,-0.579 0.472,-1.197 0.601,-1.702c0.101,-0.395 0.242,-1.206 0.242,-1.391l0,-0.136l-22.541,0l0,-1.56l22.541,0l0,-0.136c0,-0.185 -0.141,-0.995 -0.242,-1.391c-0.129,-0.504 -0.348,-1.123 -0.601,-1.702c-0.128,-0.291 -0.229,-0.529 -0.225,-0.529c0.052,0 10.52,4.508 10.527,4.534c0.007,0.025 -10.461,4.543 -10.526,4.543c-0.005,0 0.096,-0.239 0.224,-0.53Z' /%3E%3C/svg%3E"
     },
     {
