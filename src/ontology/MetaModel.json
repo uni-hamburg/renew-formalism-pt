@@ -43,7 +43,8 @@
     },
     {
       "type": "marking",
-      "regex": "\\d+"
+      "regex": "\\d+",
+      "default": "1"
     }
   ]
 }
