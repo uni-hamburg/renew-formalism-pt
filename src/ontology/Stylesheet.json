@@ -90,6 +90,10 @@
   "text-styles": [
     {
       "target-type": "name",
+      "bounding-box": {
+        "width": 200,
+        "height": 20
+      },
       "orientation": {
         "position": "south",
         "margin": {
