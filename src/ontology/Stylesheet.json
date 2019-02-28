@@ -90,11 +90,18 @@
   "text-styles": [
     {
       "target-type": "name",
-      "position": "south"
+      "orientation": {
+        "position": "south",
+        "margin": {
+          "top": 20
+        }
+      }
     },
     {
       "target-type": "marking",
-      "position": "center"
+      "orientation": {
+        "position": "center"
+      }
     }
   ]
 }
