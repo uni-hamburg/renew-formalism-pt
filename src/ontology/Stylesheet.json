@@ -95,7 +95,8 @@
         "height": 20
       },
       "orientation": {
-        "position": "south",
+        "position": "cardinal",
+        "direction": "south",
         "margin": {
           "top": 20
         }
