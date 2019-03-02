@@ -8,14 +8,14 @@
     "build": "rollup -c --environment BUILD:production"
   },
   "dependencies": {
-    "renew-formalism": "git+https://github.com/uni-hamburg/renew-formalism.git"
+    "renew-formalism": "git+https://github.com/renew-js/renew-formalism.git"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "eslint": "^5.12.0",
     "eslint-config-google": "^0.11.0",
-    "eslint-config-renew": "git+https://github.com/uni-hamburg/eslint-config-renew.git",
+    "eslint-config-renew": "git+https://github.com/renew-js/eslint-config-renew.git",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-buble": "^0.19.6",
