@@ -24,10 +24,7 @@
       "default-dimension": {
         "width": 40,
         "height": 40
-      },
-      "background-color": "white",
-      "line-color": "black",
-      "line-style": "normal-line"
+      }
     },
     {
       "target-type": "transition",
@@ -53,10 +50,7 @@
       "default-dimension": {
         "width": 48,
         "height": 32
-      },
-      "background-color": "white",
-      "line-color": "black",
-      "line-style": "normal-line"
+      }
     }
   ],
   "arrow-head-styles": [
@@ -84,7 +78,10 @@
   ],
   "relation-styles": [
     {
-      "target-type": "arc"
+      "target-type": "arc",
+      "line-color": "black",
+      "line-width": 2,
+      "line-style": "normal-line"
     }
   ],
   "text-styles": [
