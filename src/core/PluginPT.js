@@ -11,11 +11,11 @@ import PnmlImporter from '../import/PnmlImporter';
  */
 export default class PluginPT extends Formalism.Plugin {
 
-    constructor (baseExporter, baseImporter) {
+    constructor (baseExporter, baseImporter, metaFactory) {
         super();
         this.type = metamodel.type;
         this.exporter = new PnmlExporter(baseExporter);
-        this.importer = new PnmlImporter(baseImporter, this.getStylesheet());
+        this.importer = new PnmlImporter(baseImporter, metaFactory);
     }
 
     /**

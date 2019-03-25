@@ -3,12 +3,11 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export default class PnmlImporter {
 
-    constructor (baseImporter, stylesheet) {
+    constructor (baseImporter, metaFactory) {
         this.baseImporter = baseImporter;
-        this.stylesheet = stylesheet;
+        this.metaFactory = metaFactory;
         this.parser = new DOMParser();
         this.elements = null;
-        this.newElement = null;
     }
 
     /**
@@ -44,18 +43,19 @@ export default class PnmlImporter {
         );
 
         let title = null;
+        let lastElement = null;
         while (treeWalker.nextNode()) {
             switch (treeWalker.currentNode.nodeName) {
                 case 'place':
                 case 'transition':
                 case 'arc':
-                    this.createElement(treeWalker.currentNode);
+                    lastElement = this.createElement(treeWalker.currentNode);
                     break;
                 case 'position':
-                    this.setPosition(treeWalker.currentNode);
+                    this.setPosition(treeWalker.currentNode, lastElement);
                     break;
                 case 'dimension':
-                    this.setDimension(treeWalker.currentNode);
+                    this.setDimension(treeWalker.currentNode, lastElement);
                     break;
                 case 'name':
                     title = this.getName(treeWalker.currentNode);
@@ -72,87 +72,40 @@ export default class PnmlImporter {
     }
 
     createElement (node) {
-        switch (node.nodeName) {
-            case 'place':
-                this.newElement = this.createPlace(node);
-                break;
-            case 'transition':
-                this.newElement = this.createTransition(node);
-                break;
-            case 'arc':
-                this.newElement = this.createArc(node);
-                break;
-            default:
-                // TODO add more shapes
+        const element = this.metaFactory.createElement('pt:' + node.nodeName);
+        element.id = 'import_' + node.attributes.id.value;
+        element.parentId = '__implicitroot';
+
+        if (node.nodeName === 'arc') {
+            element.sourceId = 'import_' + node.attributes.source.value;
+            element.targetId = 'import_' + node.attributes.target.value;
         }
-        this.elements.push(this.newElement);
+
+        this.elements.push(element);
+
+        return element;
     }
 
-    createPlace (node) {
-        const style = this.stylesheet.getStyle('place');
-        return {
-            id: 'import_' + node.attributes.id.value,
-            class: 'Classifier',
-            type: 'shape',
-            model: 'pt',
-            metaObject: Object.assign({
-                type: 'place',
-            }, style),
-            parentId: '__implicitroot', // TODO
-            incoming: [],
-            outgoing: [],
-        };
-    }
-
-    createTransition (node) {
-        const style = this.stylesheet.getStyle('transition');
-        return {
-            id: 'import_' + node.attributes.id.value,
-            class: 'Classifier',
-            type: 'shape',
-            model: 'pt',
-            metaObject: Object.assign({
-                type: 'transition',
-            }, style),
-            parentId: '__implicitroot', // TODO
-            incoming: [],
-            outgoing: [],
-        };
-    }
-
-    createArc (node) {
-        return {
-            id: 'import_' + node.attributes.id.value,
-            class: 'Connection',
-            type: 'connection',
-            model: 'pt',
-            metaObject: {
-                type: 'arc',
-            },
-            parentId: '__implicitroot', // TODO
-            sourceId: 'import_' + node.attributes.source.value,
-            targetId: 'import_' + node.attributes.target.value,
-        };
-    }
-
-    setPosition (node) {
-        if (!this.newElement) {
+    setPosition (node, element) {
+        if (!element) {
             return;
         }
-        this.newElement.x = parseInt(node.attributes.x.value);
-        this.newElement.y = parseInt(node.attributes.y.value);
+
+        element.x = parseInt(node.attributes.x.value);
+        element.y = parseInt(node.attributes.y.value);
     }
 
-    setDimension (node) {
-        if (!this.newElement) {
+    setDimension (node, element) {
+        if (!element) {
             return;
         }
+
         const width = parseInt(node.attributes.x.value);
         const height = parseInt(node.attributes.y.value);
-        this.newElement.width = width;
-        this.newElement.height = height;
-        const representation = this.newElement.metaObject.representation;
-        if (this.newElement.metaObject.type === 'place') {
+        element.width = width;
+        element.height = height;
+        const representation = element.metaObject.representation;
+        if (element.metaObject.type === 'place') {
             representation.attributes.rx
                 = representation.proportions.rx * width;
             representation.attributes.ry
