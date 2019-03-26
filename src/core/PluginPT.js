@@ -4,18 +4,18 @@ import metamodel from '../ontology/MetaModel.json';
 import stylesheet from '../ontology/Stylesheet.json';
 import toolConfiguration from '../ontology/ToolConfiguration.json';
 import PnmlExporter from '../export/PnmlExporter';
-import PnmlImporter from '../import/PnmlImporter';
+import PnmlImportParser from '../parser/pnml/PnmlImportParser';
 
 /**
  *
  */
 export default class PluginPT extends Formalism.Plugin {
 
-    constructor (baseExporter, baseImporter, metaFactory) {
+    constructor (baseExporter, metaFactory) {
         super();
         this.type = metamodel.type;
         this.exporter = new PnmlExporter(baseExporter);
-        this.importer = new PnmlImporter(baseImporter, metaFactory);
+        this.pnmlImportParser = new PnmlImportParser(metaFactory);
     }
 
     /**
@@ -43,8 +43,13 @@ export default class PluginPT extends Formalism.Plugin {
         return this.exporter.getExport(additionalData);
     }
 
-    import (data) {
-        return this.importer.import(data);
+    getImportParser (format) {
+        switch (format) {
+            case 'pnml':
+                return this.pnmlImportParser;
+            default:
+                throw new Error('Unknown import format');
+        }
     }
 
     // TODO: rules ?

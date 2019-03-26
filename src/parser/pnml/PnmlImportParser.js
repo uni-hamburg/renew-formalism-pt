@@ -1,29 +1,15 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 
-export default class PnmlImporter {
+export default class PnmlImportParser {
 
-    constructor (baseImporter, metaFactory) {
-        this.baseImporter = baseImporter;
+    constructor (metaFactory) {
         this.metaFactory = metaFactory;
-        this.parser = new DOMParser();
-        this.elements = null;
+        this.domParser = new DOMParser();
     }
 
-    /**
-     * Import PNML
-     * @param  {string} pnml The import data
-     * @return {object}      The parsed import data
-     */
-    import (pnml) {
-        const data = this.parsePnml(pnml);
-        this.baseImporter.import(data);
-        return data;
-    }
-
-    parsePnml (pnml) {
-        this.elements = [];
-        const dom = this.parser.parseFromString(pnml, 'application/xml');
+    parse (pnml) {
+        const dom = this.domParser.parseFromString(pnml, 'application/xml');
 
         const rootElement = dom.documentElement;
         if (rootElement.nodeName !== 'pnml'
@@ -42,14 +28,16 @@ export default class PnmlImporter {
             NodeFilter.SHOW_ELEMENT
         );
 
-        let title = null;
+        const elements = [];
         let lastElement = null;
+        let title = null;
         while (treeWalker.nextNode()) {
             switch (treeWalker.currentNode.nodeName) {
                 case 'place':
                 case 'transition':
                 case 'arc':
                     lastElement = this.createElement(treeWalker.currentNode);
+                    elements.push(lastElement);
                     break;
                 case 'position':
                     this.setPosition(treeWalker.currentNode, lastElement);
@@ -66,7 +54,7 @@ export default class PnmlImporter {
         }
 
         return {
-            elements: this.elements,
+            elements,
             title,
         };
     }
@@ -80,8 +68,6 @@ export default class PnmlImporter {
             element.sourceId = 'import_' + node.attributes.source.value;
             element.targetId = 'import_' + node.attributes.target.value;
         }
-
-        this.elements.push(element);
 
         return element;
     }
