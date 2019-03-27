@@ -1,7 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep';
-
-
-export default class PnmlImportParser {
+export default class PnmlParser {
 
     constructor (metaFactory) {
         this.metaFactory = metaFactory;
