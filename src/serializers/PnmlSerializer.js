@@ -1,22 +1,10 @@
-export default class PnmlExporter {
+export default class PnmlSerializer {
 
-    constructor (baseExporter) {
-        this.baseExporter = baseExporter;
+    constructor () {
         this.xmlSerializer = new XMLSerializer();
     }
 
-    /**
-     * Get PNML export
-     * @param  {object} [additionalData]
-     * @return {string}      The export data
-     */
-    getExport (additionalData) {
-        const name = additionalData.title || null;
-        const data = this.baseExporter.getExport();
-        return this.createPnml(data, name);
-    }
-
-    createPnml (data, name) {
+    serialize (data) {
         const ns = 'http://www.pnml.org/version-2009/grammar/pnml';
         const doc = document.implementation.createDocument(ns, 'pnml', null);
         const netElement = doc.createElement('net');
@@ -28,17 +16,21 @@ export default class PnmlExporter {
             netElement.appendChild(classifierEl);
         });
 
-        if (name) {
+        if (data.title) {
             const nameElement = doc.createElement('name');
             const textElement = doc.createElement('text');
-            const textNode = doc.createTextNode(name);
+            const textNode = doc.createTextNode(data.title);
             textElement.appendChild(textNode);
             nameElement.appendChild(textElement);
             netElement.appendChild(nameElement);
         }
 
         doc.documentElement.appendChild(netElement);
-        return this.xmlSerializer.serializeToString(doc);
+
+        const payload = this.xmlSerializer.serializeToString(doc);
+        const mimeType = 'application/xml';
+        const fileExtension = '.pnml';
+        return { payload, mimeType, fileExtension };
     }
 
     createClassifierElement (element, doc) {

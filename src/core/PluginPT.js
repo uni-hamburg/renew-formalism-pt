@@ -3,19 +3,19 @@ import Formalism from 'renew-formalism';
 import metamodel from '../ontology/MetaModel.json';
 import stylesheet from '../ontology/Stylesheet.json';
 import toolConfiguration from '../ontology/ToolConfiguration.json';
-import PnmlExporter from '../export/PnmlExporter';
-import PnmlImporter from '../import/PnmlImporter';
+import PnmlSerializer from '../serializers/PnmlSerializer';
+import PnmlParser from '../parsers/PnmlParser';
 
 /**
  *
  */
 export default class PluginPT extends Formalism.Plugin {
 
-    constructor (baseExporter, baseImporter, metaFactory) {
+    constructor (metaFactory) {
         super();
         this.type = metamodel.type;
-        this.exporter = new PnmlExporter(baseExporter);
-        this.importer = new PnmlImporter(baseImporter, metaFactory);
+        this.pnmlSerializer = new PnmlSerializer();
+        this.pnmlParser = new PnmlParser(metaFactory);
     }
 
     /**
@@ -39,12 +39,22 @@ export default class PluginPT extends Formalism.Plugin {
         return Formalism.Ontology.ToolConfiguration.fromJson(toolConfiguration);
     }
 
-    getExport (additionalData) {
-        return this.exporter.getExport(additionalData);
+    getSerializer (format) {
+        switch (format) {
+            case 'pnml':
+                return this.pnmlSerializer;
+            default:
+                throw new Error('Unknown export format');
+        }
     }
 
-    import (data) {
-        return this.importer.import(data);
+    getParser (format) {
+        switch (format) {
+            case 'pnml':
+                return this.pnmlParser;
+            default:
+                throw new Error('Unknown import format');
+        }
     }
 
     // TODO: rules ?
