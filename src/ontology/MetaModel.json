@@ -2,17 +2,10 @@
   "type": "pt",
   "classifiers": [
     {
-      "type": "place",
-      "labels": [
-        "name",
-        "marking"
-      ]
+      "type": "place"
     },
     {
-      "type": "transition",
-      "labels": [
-        "name"
-      ]
+      "type": "transition"
     }
   ],
   "relations": [
@@ -26,10 +19,7 @@
           "place"
         ]
       },
-      "arrow-end": "arrow-head",
-      "labels": [
-        "name"
-      ]
+      "arrow-end": "arrow-head"
     }
   ],
   "arrow-heads": [
@@ -39,12 +29,20 @@
   ],
   "texts": [
     {
-      "type": "name"
+      "type": "name",
+      "targets": [
+        "place",
+        "transition",
+        "arc"
+      ]
     },
     {
       "type": "marking",
       "regex": "\\d+",
-      "default": "1"
+      "default": "1",
+      "targets": [
+        "place"
+      ]
     }
   ]
 }
