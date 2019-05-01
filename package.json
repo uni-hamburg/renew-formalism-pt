@@ -1,7 +1,7 @@
 {
   "name": "renew-formalism-pt",
   "description": "A pt-net formalism metamodel",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "scripts": {
     "lint": "eslint src --fix",
     "prebuild": "eslint src",
