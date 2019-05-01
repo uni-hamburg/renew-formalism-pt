@@ -7,15 +7,17 @@
     "prebuild": "eslint src",
     "build": "rollup -c --environment BUILD:production"
   },
+  "license": "MIT",
+  "repository": "https://github.com/renew-js/renew-formalism-pt",
   "dependencies": {
-    "renew-formalism": "git+https://github.com/renew-js/renew-formalism.git"
+    "renew-formalism": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "eslint": "^5.12.0",
     "eslint-config-google": "^0.11.0",
-    "eslint-config-renew": "git+https://github.com/renew-js/eslint-config-renew.git",
+    "eslint-config-renew": "^1.0.0",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-buble": "^0.19.6",
