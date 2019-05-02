@@ -2,6 +2,7 @@ export default class PnmlSerializer {
 
     constructor () {
         this.xmlSerializer = new XMLSerializer();
+        this.idMap = {};
     }
 
     serialize (data) {
@@ -11,10 +12,13 @@ export default class PnmlSerializer {
         netElement.setAttribute('id', 'net_' + Date.now());
         netElement.setAttribute('type', ns);
 
-        data.elements.forEach((element) => {
-            const classifierEl = this.createClassifierElement(element, doc);
-            netElement.appendChild(classifierEl);
-        });
+        for (let i = 0; i < data.elements.length; i++) {
+            this.idMap[data.elements[i].id] = i + 1;
+            data.elements[i].id = i + 1;
+            netElement.appendChild(
+                this.createClassifierElement(data.elements[i], doc)
+            );
+        }
 
         if (data.title) {
             const nameElement = doc.createElement('name');
@@ -59,11 +63,11 @@ export default class PnmlSerializer {
         if (element.sourceId && element.targetId) {
             classifierElement.setAttribute(
                 'source',
-                element.sourceId
+                this.idMap[element.sourceId]
             );
             classifierElement.setAttribute(
                 'target',
-                element.targetId
+                this.idMap[element.targetId]
             );
         }
 
