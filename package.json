@@ -10,6 +10,7 @@
   "license": "MIT",
   "repository": "https://github.com/renew-js/renew-formalism-pt",
   "dependencies": {
+    "fast-xml-parser": "^3.12.16",
     "renew-formalism": "^1.0.0"
   },
   "devDependencies": {
