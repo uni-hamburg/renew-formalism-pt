@@ -59,8 +59,16 @@ export default class PnmlSerializer {
 
                 const graphicsElement = doc.createElement('graphics');
                 const offsetElement = doc.createElement('offset');
-                offsetElement.setAttribute('x', label.x - element.x);
-                offsetElement.setAttribute('y', label.y - element.y);
+
+                // Calculate PNML offsets (relative to center of element)
+                let x = label.x - element.x;
+                x += (label.width - element.width) / 2;
+                offsetElement.setAttribute('x', x);
+
+                let y = label.y - element.y;
+                y += (label.height - element.height) / 2;
+                offsetElement.setAttribute('y', y);
+
                 graphicsElement.append(offsetElement);
 
                 let nameElement;

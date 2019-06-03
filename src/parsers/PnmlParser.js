@@ -103,10 +103,12 @@ export default class PnmlParser {
 
     createLabel (element, labelData, labelType) {
         const label = this.metaFactory.createElement(labelType);
-        label.x = labelData.graphics.offset._attributes.x + element.x;
-        label.y = labelData.graphics.offset._attributes.y + element.y;
         label.width = 150; // TODO get default dimensions from somewhere
         label.height = 50;
+        label.x = labelData.graphics.offset._attributes.x + element.x;
+        label.x -= (label.width - element.width) / 2;
+        label.y = labelData.graphics.offset._attributes.y + element.y;
+        label.y -= (label.height - element.height) / 2;
         label.text = labelData.text + '';
 
         this.elements.push(label);
