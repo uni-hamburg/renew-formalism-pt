@@ -1,92 +1,126 @@
+import { parse } from 'fast-xml-parser';
+
 export default class PnmlParser {
 
     constructor (metaFactory) {
         this.metaFactory = metaFactory;
-        this.domParser = new DOMParser();
+        this.elements = null;
     }
 
     parse (pnml) {
-        const dom = this.domParser.parseFromString(pnml, 'application/xml');
+        this.elements = [];
 
-        const rootElement = dom.documentElement;
-        if (rootElement.nodeName !== 'pnml'
-            || !rootElement.hasChildNodes()) {
+        const data = parse(pnml, {
+            attrNodeName: '_attributes',
+            attributeNamePrefix: '',
+            ignoreAttributes: false,
+            parseAttributeValue: true,
+            parseNodeValue: true,
+            ignoreNameSpace: false,
+            trimValues: true,
+        });
+
+        if (!data.pnml || !data.pnml.net) {
             throw new Error('Invalid document type.');
         }
 
-        const netElement = rootElement.firstElementChild;
-        if (netElement.nodeName !== 'net'
-            || !netElement.hasChildNodes()) {
-            throw new Error('Empty net.');
+        let title = null;
+        if (data.pnml.net.name && data.pnml.net.name.text) {
+            title = data.pnml.net.name.text;
         }
 
-        const treeWalker = document.createTreeWalker(
-            netElement,
-            NodeFilter.SHOW_ELEMENT
-        );
+        // Net elements can be inside a page element
+        const net = data.pnml.net.page || data.pnml.net;
 
-        const elements = [];
-        let lastElement = null;
-        let title = null;
-        while (treeWalker.nextNode()) {
-            switch (treeWalker.currentNode.nodeName) {
+        Object.keys(net).forEach((elementName) => {
+            switch (elementName) {
                 case 'place':
                 case 'transition':
                 case 'arc':
-                    lastElement = this.createElement(treeWalker.currentNode);
-                    elements.push(lastElement);
-                    break;
-                case 'position':
-                    this.setPosition(treeWalker.currentNode, lastElement);
-                    break;
-                case 'dimension':
-                    this.setDimension(treeWalker.currentNode, lastElement);
-                    break;
-                case 'name':
-                    title = this.getName(treeWalker.currentNode);
+                    this.createElement(net, elementName);
                     break;
                 default:
                     // TODO add more shapes or create generic shape
             }
-        }
+        });
+
+        // Make sure elements are created in the right order
+        this.sortElements();
 
         return {
-            elements,
+            elements: this.elements,
             title,
         };
     }
 
-    createElement (node) {
-        const element = this.metaFactory.createElement('pt:' + node.nodeName);
-        element.id = 'import_' + node.attributes.id.value;
+    createElement (net, elementName) {
+        const elementData = net[elementName];
+        const element = this.metaFactory.createElement('pt:' + elementName);
+        this.elements.push(element);
+
+        element.id = 'import_' + elementData._attributes.id;
         element.parentId = '__implicitroot';
 
-        if (node.nodeName === 'arc') {
-            element.sourceId = 'import_' + node.attributes.source.value;
-            element.targetId = 'import_' + node.attributes.target.value;
+        if (elementData.graphics && elementData.graphics.position) {
+            element.x = elementData.graphics.position._attributes.x || 0;
+            element.y = elementData.graphics.position._attributes.y || 0;
         }
 
-        return element;
+        if (elementData.graphics && elementData.graphics.dimension) {
+            this.setDimension(element, elementData.graphics.dimension);
+        }
+
+        switch (elementName) {
+            case 'place':
+                if (elementData.initialMarking) {
+                    // PNML standard
+                    this.createLabel(
+                        element,
+                        elementData.initialMarking,
+                        'pt:marking'
+                    );
+                } else if (elementData.toolspecific
+                    && elementData.toolspecific.inscription) {
+                    // Renew specific
+                    this.createLabel(
+                        element,
+                        elementData.toolspecific.inscription,
+                        'pt:marking'
+                    );
+                }
+                if (elementData.name) {
+                    this.createLabel(element, elementData.name, 'pt:name');
+                }
+                break;
+            case 'transition':
+                break;
+            case 'arc':
+                element.sourceId = 'import_' + elementData._attributes.source;
+                element.targetId = 'import_' + elementData._attributes.target;
+                break;
+        }
     }
 
-    setPosition (node, element) {
-        if (!element) {
-            return;
-        }
+    createLabel (element, labelData, labelType) {
+        const label = this.metaFactory.createElement(labelType);
+        label.width = 150; // TODO get default dimensions from somewhere
+        label.height = 50;
+        label.x = labelData.graphics.offset._attributes.x + element.x;
+        label.x -= (label.width - element.width) / 2;
+        label.y = labelData.graphics.offset._attributes.y + element.y;
+        label.y -= (label.height - element.height) / 2;
+        label.text = labelData.text + '';
 
-        element.x = parseInt(node.attributes.x.value);
-        element.y = parseInt(node.attributes.y.value);
+        this.elements.push(label);
+        element.labels.push(label);
     }
 
-    setDimension (node, element) {
-        if (!element) {
-            return;
-        }
-
-        const width = parseInt(node.attributes.x.value);
-        const height = parseInt(node.attributes.y.value);
+    setDimension (element, dimension) {
+        const width = dimension._attributes.x;
+        const height = dimension._attributes.y;
         element.width = width;
         element.height = height;
+
         const representation = element.metaObject.representation;
         if (element.metaObject.type === 'place') {
             representation.attributes.rx
@@ -109,8 +143,15 @@ export default class PnmlParser {
         }
     }
 
-    getName (node) {
-        return node.firstElementChild.firstChild.nodeValue;
+    sortElements () {
+        const sortOrder = {
+            'shape': 0,
+            'label': 1,
+            'connection': 2,
+        };
+        this.elements.sort((a, b) => {
+            return sortOrder[a.type] - sortOrder[b.type];
+        });
     }
 
 }
