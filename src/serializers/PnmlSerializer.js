@@ -1,6 +1,7 @@
 export default class PnmlSerializer {
 
-    constructor () {
+    constructor (renewSpecific = false) {
+        this.renewSpecific = renewSpecific;
         this.xmlSerializer = new XMLSerializer();
         this.idMap = {};
         this.exportTypes = [
@@ -71,22 +72,31 @@ export default class PnmlSerializer {
 
                 graphicsElement.append(offsetElement);
 
-                let nameElement;
-                let markingElement;
+                let labelElement;
+                let inscriptElement;
                 switch (label.metaObject.targetType) {
                     case 'name':
-                        nameElement = doc.createElement('name');
-                        nameElement.appendChild(textElement);
-                        nameElement.appendChild(graphicsElement);
-                        classifierElement.appendChild(nameElement);
+                        labelElement = doc.createElement('name');
+                        labelElement.appendChild(textElement);
+                        labelElement.appendChild(graphicsElement);
                         break;
                     case 'marking':
-                        markingElement = doc.createElement('initialMarking');
-                        markingElement.appendChild(textElement);
-                        markingElement.appendChild(graphicsElement);
-                        classifierElement.appendChild(markingElement);
-                        break;
+                        if (this.renewSpecific) {
+                            inscriptElement = doc.createElement('inscription');
+                            inscriptElement.appendChild(textElement);
+                            inscriptElement.appendChild(graphicsElement);
+                            labelElement = doc.createElement('toolspecific');
+                            labelElement.setAttribute('tool', 'renew');
+                            labelElement.setAttribute('version', '2.0');
+                            labelElement.appendChild(inscriptElement);
+                        } else {
+                            labelElement = doc.createElement('initialMarking');
+                            labelElement.appendChild(textElement);
+                            labelElement.appendChild(graphicsElement);
+                        }
                 }
+
+                classifierElement.appendChild(labelElement);
             });
         }
 
