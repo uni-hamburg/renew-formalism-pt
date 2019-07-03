@@ -104,6 +104,12 @@
       "orientation": {
         "position": "center"
       }
+    },
+    {
+      "target-type": "inscription",
+      "orientation": {
+        "position": "center"
+      }
     }
   ]
 }
