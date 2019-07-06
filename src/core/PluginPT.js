@@ -15,6 +15,7 @@ export default class PluginPT extends Formalism.Plugin {
         super();
         this.type = metamodel.type;
         this.pnmlSerializer = new PnmlSerializer();
+        this.pnmlRenewSerializer = new PnmlSerializer(true);
         this.pnmlParser = new PnmlParser(metaFactory);
     }
 
@@ -43,6 +44,8 @@ export default class PluginPT extends Formalism.Plugin {
         switch (format) {
             case 'pnml':
                 return this.pnmlSerializer;
+            case 'pnml-renew':
+                return this.pnmlRenewSerializer;
             default:
                 throw new Error('Unknown export format');
         }

@@ -43,6 +43,12 @@
       "targets": [
         "place"
       ]
+    },
+    {
+      "type": "inscription",
+      "targets": [
+        "arc"
+      ]
     }
   ]
 }

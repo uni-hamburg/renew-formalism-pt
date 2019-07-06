@@ -32,12 +32,18 @@ export default class PnmlParser {
         // Net elements can be inside a page element
         const net = data.pnml.net.page || data.pnml.net;
 
-        Object.keys(net).forEach((elementName) => {
-            switch (elementName) {
+        Object.keys(net).forEach((elementType) => {
+            switch (elementType) {
                 case 'place':
                 case 'transition':
                 case 'arc':
-                    this.createElement(net, elementName);
+                    if (Array.isArray(net[elementType])) {
+                        net[elementType].forEach((elementData) => {
+                            this.createElement(net, elementType, elementData);
+                        });
+                    } else {
+                        this.createElement(net, elementType, net[elementType]);
+                    }
                     break;
                 default:
                     // TODO add more shapes or create generic shape
@@ -53,9 +59,8 @@ export default class PnmlParser {
         };
     }
 
-    createElement (net, elementName) {
-        const elementData = net[elementName];
-        const element = this.metaFactory.createElement('pt:' + elementName);
+    createElement (net, elementType, elementData) {
+        const element = this.metaFactory.createElement('pt:' + elementType);
         this.elements.push(element);
 
         element.id = 'import_' + elementData._attributes.id;
@@ -70,7 +75,7 @@ export default class PnmlParser {
             this.setDimension(element, elementData.graphics.dimension);
         }
 
-        switch (elementName) {
+        switch (elementType) {
             case 'place':
                 if (elementData.initialMarking) {
                     // PNML standard
@@ -95,6 +100,14 @@ export default class PnmlParser {
             case 'transition':
                 break;
             case 'arc':
+                if (elementData.toolspecific
+                    && elementData.toolspecific.inscription) {
+                    this.createLabel(
+                        element,
+                        elementData.toolspecific.inscription,
+                        'pt:inscription'
+                    );
+                }
                 element.sourceId = 'import_' + elementData._attributes.source;
                 element.targetId = 'import_' + elementData._attributes.target;
                 break;
@@ -105,10 +118,12 @@ export default class PnmlParser {
         const label = this.metaFactory.createElement(labelType);
         label.width = 150; // TODO get default dimensions from somewhere
         label.height = 50;
-        label.x = labelData.graphics.offset._attributes.x + element.x;
-        label.x -= (label.width - element.width) / 2;
-        label.y = labelData.graphics.offset._attributes.y + element.y;
-        label.y -= (label.height - element.height) / 2;
+
+        // TODO Get bbox of arcs (layoutConnection?)
+        label.x = labelData.graphics.offset._attributes.x + (element.x || 0);
+        label.x -= (label.width - (element.width || 0)) / 2;
+        label.y = labelData.graphics.offset._attributes.y + (element.y || 0);
+        label.y -= (label.height - (element.height || 0)) / 2;
         label.text = labelData.text + '';
 
         this.elements.push(label);

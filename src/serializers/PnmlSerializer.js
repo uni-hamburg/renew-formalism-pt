@@ -1,6 +1,7 @@
 export default class PnmlSerializer {
 
-    constructor () {
+    constructor (isRenewSpecific = false) {
+        this.isRenewSpecific = isRenewSpecific;
         this.xmlSerializer = new XMLSerializer();
         this.idMap = {};
         this.exportTypes = [
@@ -16,6 +17,7 @@ export default class PnmlSerializer {
         const netElement = doc.createElement('net');
         netElement.setAttribute('id', 'net_' + Date.now());
         netElement.setAttribute('type', ns);
+        data = JSON.parse(JSON.stringify(data));
 
         let elementType;
         for (let i = 0; i < data.elements.length; i++) {
@@ -71,22 +73,40 @@ export default class PnmlSerializer {
 
                 graphicsElement.append(offsetElement);
 
-                let nameElement;
-                let markingElement;
+                let labelElement;
                 switch (label.metaObject.targetType) {
                     case 'name':
-                        nameElement = doc.createElement('name');
-                        nameElement.appendChild(textElement);
-                        nameElement.appendChild(graphicsElement);
-                        classifierElement.appendChild(nameElement);
+                        labelElement = doc.createElement('name');
+                        labelElement.appendChild(textElement);
+                        labelElement.appendChild(graphicsElement);
                         break;
                     case 'marking':
-                        markingElement = doc.createElement('initialMarking');
-                        markingElement.appendChild(textElement);
-                        markingElement.appendChild(graphicsElement);
-                        classifierElement.appendChild(markingElement);
+                        if (this.isRenewSpecific) {
+                            labelElement = this.createInscription(
+                                doc,
+                                textElement,
+                                graphicsElement
+                            );
+                        } else {
+                            labelElement = doc.createElement('initialMarking');
+                            labelElement.appendChild(textElement);
+                            labelElement.appendChild(graphicsElement);
+                        }
                         break;
+                    case 'inscription':
+                        if (this.isRenewSpecific) {
+                            labelElement = this.createInscription(
+                                doc,
+                                textElement,
+                                graphicsElement
+                            );
+                        }
+                        break;
+                    default:
+                        return;
                 }
+
+                classifierElement.appendChild(labelElement);
             });
         }
 
@@ -120,6 +140,19 @@ export default class PnmlSerializer {
         }
 
         return classifierElement;
+    }
+
+    createInscription (doc, textElement, graphicsElement) {
+        const inscriptElement = doc.createElement('inscription');
+        inscriptElement.appendChild(textElement);
+        inscriptElement.appendChild(graphicsElement);
+
+        const labelElement = doc.createElement('toolspecific');
+        labelElement.setAttribute('tool', 'renew');
+        labelElement.setAttribute('version', '2.0');
+        labelElement.appendChild(inscriptElement);
+
+        return labelElement;
     }
 
 }
