@@ -126,7 +126,9 @@ export default class PnmlSerializer {
             graphicsElement.appendChild(dimensionElement);
         }
 
-        graphicsElement.appendChild(this._createFillElement(doc, element));
+        if (element.metaObject.representation) {
+            graphicsElement.appendChild(this._createFillElement(doc, element));
+        }
 
         classifierElement.appendChild(graphicsElement);
 
