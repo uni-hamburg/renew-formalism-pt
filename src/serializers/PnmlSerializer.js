@@ -127,7 +127,10 @@ export default class PnmlSerializer {
         }
 
         if (element.metaObject.representation) {
-            graphicsElement.appendChild(this._createFillElement(doc, element));
+            const fillElement = this._createFillElement(doc, element);
+            if (fillElement) {
+                graphicsElement.appendChild(fillElement);
+            }
         }
 
         classifierElement.appendChild(graphicsElement);
@@ -172,17 +175,19 @@ export default class PnmlSerializer {
 
     _createFillElement (doc, element) {
         const style = this._getStyle(element);
-        let fill = { r: 112, g: 219, b: 147 };
-        if (style.fill) {
-            console.log(style.fill);
-            fill = this._hexToRgb(style.fill);
+
+        if (!style.fill) {
+            return false;
         }
 
         const fillElement = doc.createElement('fill');
+
+        const fill = this._hexToRgb(style.fill);
         fillElement.setAttribute(
             'color',
-            'rgb(' + fill.r + ',' + fill.g + ',' + fill.b +')'
+            'rgb(' + fill.r + ',' + fill.g + ',' + fill.b +')',
         );
+
         return fillElement;
     }
 
