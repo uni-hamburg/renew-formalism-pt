@@ -146,8 +146,6 @@ export default class PnmlSerializer {
             );
         }
 
-        console.log(element);
-
         return classifierElement;
     }
 
@@ -187,7 +185,7 @@ export default class PnmlSerializer {
         const fill = this._hexToRgb(style.fill);
         fillElement.setAttribute(
             'color',
-            'rgb(' + fill.r + ',' + fill.g + ',' + fill.b +')',
+            'rgb(' + fill.r + ',' + fill.g + ',' + fill.b +')'
         );
 
         return fillElement;
