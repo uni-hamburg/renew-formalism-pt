@@ -126,6 +126,13 @@ export default class PnmlSerializer {
             graphicsElement.appendChild(dimensionElement);
         }
 
+        if (element.metaObject.representation) {
+            const fillElement = this._createFillElement(doc, element);
+            if (fillElement) {
+                graphicsElement.appendChild(fillElement);
+            }
+        }
+
         classifierElement.appendChild(graphicsElement);
 
         if (element.sourceId && element.targetId) {
@@ -153,6 +160,55 @@ export default class PnmlSerializer {
         labelElement.appendChild(inscriptElement);
 
         return labelElement;
+    }
+
+    _getStyle (element) {
+        const style = { };
+        const rawStyle = element.metaObject.representation.attributes.style
+            .split(';').filter(Boolean);
+        for (let i=0; i<rawStyle.length; i++) {
+            const [ key, value ] = rawStyle[i].split(':');
+            style[key.trim()] = value.trim();
+        }
+        return style;
+    }
+
+    _createFillElement (doc, element) {
+        const style = this._getStyle(element);
+
+        if (!style.fill) {
+            return false;
+        }
+
+        const fillElement = doc.createElement('fill');
+
+        const fill = this._hexToRgb(style.fill);
+        fillElement.setAttribute(
+            'color',
+            'rgb(' + fill.r + ',' + fill.g + ',' + fill.b +')',
+        );
+
+        return fillElement;
+    }
+
+    /**
+     * src: https://stackoverflow.com/questions/5623838
+     * @private
+     * @param {string} hex
+     * @return {{r,g,b}}
+     */
+    _hexToRgb (hex) {
+        const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, (m, r, g, b) => {
+            return r + r + g + g + b + b;
+        });
+
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+        } : null;
     }
 
 }
