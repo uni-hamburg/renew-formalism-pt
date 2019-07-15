@@ -112,7 +112,7 @@ export default class PnmlSerializer {
 
         const graphicsElement = doc.createElement('graphics');
 
-        if (element.x && element.y) {
+        if (element.hasOwnProperty('x') && element.hasOwnProperty('y')) {
             const positionElement = doc.createElement('position');
             positionElement.setAttribute('x', element.x + element.width / 2);
             positionElement.setAttribute('y', element.y + element.height / 2);
