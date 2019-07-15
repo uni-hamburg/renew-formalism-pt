@@ -72,8 +72,8 @@ export default class PnmlParser {
         }
 
         if (elementData.graphics && elementData.graphics.dimension) {
-            element.x -= elementData.graphics.dimension.x / 2;
-            element.y -= elementData.graphics.dimension.y / 2;
+            element.x -= elementData.graphics.dimension._attributes.x / 2;
+            element.y -= elementData.graphics.dimension._attributes.y / 2;
             this.setDimension(element, elementData.graphics.dimension);
         }
 
