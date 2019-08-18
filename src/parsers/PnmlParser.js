@@ -66,7 +66,9 @@ export default class PnmlParser {
         element.id = 'import_' + elementData._attributes.id;
         element.parentId = '__implicitroot';
 
-        if (elementData.graphics && elementData.graphics.position) {
+        if (elementData.graphics
+            && elementData.graphics.position
+            && elementType != 'arc') {
             element.x = elementData.graphics.position._attributes.x || 0;
             element.y = elementData.graphics.position._attributes.y || 0;
         }
@@ -121,12 +123,12 @@ export default class PnmlParser {
         label.width = 150; // TODO get default dimensions from somewhere
         label.height = 50;
 
-        // TODO Get bbox of arcs (layoutConnection?)
         label.x = labelData.graphics.offset._attributes.x + (element.x || 0);
         label.x -= (label.width - (element.width || 0)) / 2;
         label.y = labelData.graphics.offset._attributes.y + (element.y || 0);
         label.y -= (label.height - (element.height || 0)) / 2;
         label.text = labelData.text + '';
+        label.parent = element;
 
         this.elements.push(label);
         element.labels.push(label);
@@ -163,8 +165,8 @@ export default class PnmlParser {
     sortElements () {
         const sortOrder = {
             'shape': 0,
-            'label': 1,
-            'connection': 2,
+            'connection': 1,
+            'label': 2,
         };
         this.elements.sort((a, b) => {
             return sortOrder[a.type] - sortOrder[b.type];
